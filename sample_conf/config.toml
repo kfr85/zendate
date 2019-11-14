@@ -1,0 +1,10 @@
+["README.md"]
+description = "readme file"
+text = """
+sample document
+"""
+
+["lib/.gitkeep"]
+description = "library dir"
+
+
