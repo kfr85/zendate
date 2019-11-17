@@ -2,27 +2,36 @@ package main
 
 import (
 	"fmt"
-	_ "github.com/BurntSushi/toml"
-	_ "github.com/naoina/toml"
-	"github.com/pelletier/go-toml"
+	"github.com/naoina/toml"
+	"os"
 )
 
 type Config struct {
-	Path map[string]PathConfig
-}
-
-type PathConfig struct {
-	Description string
-	Text        string
+	Project struct {
+		Name        string
+		Description string
+	}
+	File []struct {
+		Path        string
+		Description string
+		Text        string
+	}
 }
 
 func main() {
 	fmt.Println("hello")
-	config, err := toml.LoadFile("sample_conf/config.toml")
+	f, err := os.Open("conf/sample.toml")
 	if err != nil {
 		panic(err)
 	}
+	defer f.Close()
+	var config Config
+	if err := toml.NewDecoder(f).Decode(&config); err != nil {
+		panic(err)
+	}
 
-	fmt.Println(config.ToTomlString())
+	for _, v := range config.File {
+		fmt.Println(v.Path)
+	}
 
 }

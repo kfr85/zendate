@@ -1,0 +1,16 @@
+[project]
+name = "ssss"
+description = "glidman"
+
+[[file]]
+path = "README.md"
+description = "readme file"
+text = """
+sample document
+"""
+
+[[file]]
+path = "lib/.gitkeep"
+description = "library dir"
+
+
